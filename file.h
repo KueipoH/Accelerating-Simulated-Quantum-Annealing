@@ -11,6 +11,7 @@ using namespace std;
 
 struct Edge {
     int u, v;
+    float w;
 };
 
 class ReadGraph{
