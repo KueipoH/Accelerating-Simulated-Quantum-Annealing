@@ -1,6 +1,6 @@
 # Welcome to the Simulated Quantum Annealing repository
 <img align="right" width="200"
-src="https://photos.app.goo.gl/mKkdKsCktGQF2ZUV6"
+src="https://github.com/KueipoH/Accelerating-Simulated-Quantum-Annealing/blob/main/DALL%C2%B7E%202023-05-03%2010.05.41%20-%20Accelerating%20Simulated%20Quantum%20Annealing%20.png"
 />
 Simulated Quantum Annealing (SQA) is inspired by Quantum Annealing (QA) and aims to emulate the quantum tunneling effect on classical computers using a path-integral Monte Carlo simulation. This simulation introduces the strength of couplings between replicas.
 
