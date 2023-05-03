@@ -9,8 +9,9 @@ ReadGraph::ReadGraph(const string& filename) {
         while (getline(inFile, line)) {
             stringstream ss(line);
             int u, v;
-            ss >> u >> v;
-            edges.push_back({u, v});
+            float w;
+            ss >> u >> v >> w;
+            edges.push_back({u, v, w});
             numNodes = max(numNodes, max(u, v));
         }
         inFile.close();
