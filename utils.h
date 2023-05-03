@@ -21,10 +21,10 @@ vector<vector<int>> edgeListToQUBO(vector<Edge>& edges, int numNodes) {
     vector<vector<int>> Qubo(numNodes, vector<int>(numNodes));
     
     for (auto& edge : edges) {
-        Qubo[edge.u-1][edge.v-1] -= 1;
-        Qubo[edge.v-1][edge.u-1] -= 1;
-        Qubo[edge.u-1][edge.u-1] += 1;
-        Qubo[edge.v-1][edge.v-1] += 1;
+        Qubo[edge.u-1][edge.v-1] -= edge.w;
+        Qubo[edge.v-1][edge.u-1] -= edge.w;
+        Qubo[edge.u-1][edge.u-1] += edge.w;
+        Qubo[edge.v-1][edge.v-1] += edge.w;
     }
     return Qubo;
 }
