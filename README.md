@@ -1,5 +1,7 @@
 # Welcome to the Simulated Quantum Annealing repository
-
+<img align="right" width="200"
+src="https://labs.openai.com/e/jEhTAnueir9PX7wiWX9xQYWT"
+/>
 Simulated Quantum Annealing (SQA) is inspired by Quantum Annealing (QA) and aims to emulate the quantum tunneling effect on classical computers using a path-integral Monte Carlo simulation. This simulation introduces the strength of couplings between replicas.
 
 In this project, I have referred to __Accelerating Simulated Quantum Annealing with GPU and Tensor Cores__ as a foundation. To quickly grasp the concept of SQA, I have initially developed a CPU-based version for validation. Following this, I will proceed to implement a CUDA version based on the literature.
