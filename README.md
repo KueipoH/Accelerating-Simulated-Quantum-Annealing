@@ -19,10 +19,6 @@ Firstly, it is crucial to understand the concept of the Local-field matrix's dim
 g++ -std=c++14 main.cpp file.cpp -o sqa && ./sqa
 ```
 
-## License
-The code in this repository is licensed under [Apache License 2.0](https://github.com/NVIDIA/cuda-quantum/blob/main/LICENSE).
-Contributing a pull request to this repo requires accepting the Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. A CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately. Simply follow the instructions provided by the bot. You will only need to do this once.
-
 
 ## Results
 
@@ -39,4 +35,8 @@ Please let me know your feedback and ideas, the Cuda version is coming soon.
 
 - __Accelerating Simulated Quantum Annealing with GPU and Tensor Cores__, High Performance Computing: 37th International Conference, ISC High Performance 2022, Hamburg, Germany, May 29–June 2, 2022, Proceedings. 
 - Dataset. [G-Set](https://web.stanford.edu/~yyye/yyye/Gset/)
+
+## License
+The code in this repository is licensed under [Apache License 2.0](https://github.com/NVIDIA/cuda-quantum/blob/main/LICENSE).
+Contributing a pull request to this repo requires accepting the Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. A CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately. Simply follow the instructions provided by the bot. You will only need to do this once.
 
