@@ -8,8 +8,7 @@ ReadGraph::ReadGraph(const string& filename) {
         getline(inFile, line);
         while (getline(inFile, line)) {
             stringstream ss(line);
-            int u, v;
-            float w;
+            int u, v, w;
             ss >> u >> v >> w;
             edges.push_back({u, v, w});
             numNodes = max(numNodes, max(u, v));
