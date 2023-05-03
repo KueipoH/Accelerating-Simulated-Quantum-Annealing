@@ -9,10 +9,13 @@
 #include <unordered_map>
 #include "file.h"
 #include "utils.h"
+#include "gset.h"
 //#include <omp.h>
 
 using namespace std;
 using namespace std::chrono;
+extern unordered_map<string, string> my_graph;
+
 
 vector<vector<int>> edgeListToQUBO(vector<Edge>& edges, int numNodes);
 vector<vector<int>> random_2d_spin(int , int );
@@ -30,24 +33,7 @@ uniform_real_distribution<double> uniform_dist(0.0, 1.0);
 
 
 int main(){
-    unordered_map<string, string> my_graph;
-    my_graph["G1"] = "11624";
-    my_graph["G2"] = "11620"; 
-    my_graph["G3"] = "11622";  
-    my_graph["G4"] = "11646"; 
-    my_graph["G5"] = "11631";
-    my_graph["G14"] = "3064";
-    my_graph["G15"] = "3050";
-    my_graph["G16"] = "3052";
-    my_graph["G17"] = "3047";
-    my_graph["G36"] = "7680";
-    my_graph["G47"] = "6657";
-    my_graph["G51"] = "3848";
-    my_graph["G55"] = "10289";
-    my_graph["G58"] = "19293";
-    my_graph["G60"] = "14188";
-    my_graph["G63"] = "27045";
-    my_graph["G70"] = "9522";
+
     string filename = "G1";
     
     // Coupling Matrix ← Couplings Data
