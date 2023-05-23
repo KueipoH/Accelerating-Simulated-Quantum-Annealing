@@ -4,11 +4,11 @@ src="https://github.com/KueipoH/Accelerating-Simulated-Quantum-Annealing/blob/ma
 />
 Simulated Quantum Annealing (SQA) is inspired by Quantum Annealing (QA) and aims to emulate the quantum tunneling effect on classical computers using a path-integral Monte Carlo simulation. This simulation introduces the strength of couplings between replicas.
 
-In this project, I have referred to __Accelerating Simulated Quantum Annealing with GPU and Tensor Cores__ as a foundation. To quickly grasp the concept of SQA, I have initially developed a CPU-based version for validation. Following this, I will proceed to implement a CUDA version based on the literature.
+In this project, I have referred to [Accelerating Simulated Quantum Annealing with GPU and Tensor Cores as a foundation](https://link.springer.com/chapter/10.1007/978-3-031-07312-0_9). To quickly grasp the concept of SQA, I have initially developed a CPU-based version for validation. Following this, I will proceed to implement a CUDA version based on the literature.
 
 ## Getting Started
 
-This project is a __CPU-based__ implementation of the research paper. _Accelerating Simulated Quantum Annealing with GPU and Tensor Cores_ by Author Yi-Hua Chung, Cheng-Jhih Shih, and Shih-Hao Hung. [Link to paper](https://link.springer.com/chapter/10.1007/978-3-031-07312-0_9).
+This project is a __CPU-based__ implementation of the research paper. _Accelerating Simulated Quantum Annealing with GPU and Tensor Cores_ by Author Yi-Hua Chung, Cheng-Jhih Shih, and Shih-Hao Hung. .
 
 Firstly, it is crucial to understand the concept of the Local-field matrix's dimensions. Upon initial reading, one might easily be misled by the Trotter diagrams in terms of comprehending the Local-field matrix's dimensional space. It is also important to consider why the author has chosen to implement the outer loop for spins and the inner loop for Trotters. This choice is the rationale behind updating the local-field energy. Finally, when it comes to implementation details, the crux lies in selecting the final spin. While theory provides a foundation, the secret is hidden within my very own code.
 
