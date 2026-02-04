@@ -3,7 +3,6 @@
 #include <cmath>
 #include <random>
 #include <unordered_map>
-//#include <omp.h>
 
 random_device rd1;
 mt19937 gen(rd1());
@@ -19,7 +18,7 @@ vector<int> spin_to_binary(const vector<int>& spin_vector) {
 
 vector<vector<int>> edgeListToQUBO(vector<Edge>& edges, int numNodes) {
     vector<vector<int>> Qubo(numNodes, vector<int>(numNodes));
-    
+
     for (auto& edge : edges) {
         Qubo[edge.u-1][edge.v-1] -= edge.w;
         Qubo[edge.v-1][edge.u-1] -= edge.w;
@@ -33,7 +32,7 @@ float str_c(float M, int t_mc, int MC_Step){
     float mystery = 32.;
     float T = 1./(t_mc*(1. - 1./8.)/ static_cast<float>(MC_Step));
     return T/2.*log(cosh(mystery*(1.-t_mc/MC_Step)/(M* T)));
-} 
+}
 
 vector<vector<int>> random_2d_spin(int N, int trotter_M){
     vector<vector<int>> spin_init(N, vector<int>(vector<int>(trotter_M)));
@@ -49,16 +48,15 @@ vector<vector<int>> local_field_init(int N, int trotter_M) {
     return vector<vector<int>>(N, vector<int>(trotter_M, 0));
 }
 
-int ising_energy(vector<vector<int>>graph, vector<int>spin){
+// [Opt 6] Pass by const reference instead of by value (avoid deep copy)
+int ising_energy(const vector<vector<int>>& graph, const vector<int>& spin){
     int calc_energy = 0;
-    vector<int> result(graph[0].size());
+    int n = graph[0].size();
+    vector<int> result(n);
 
-    int num_threads = 8;
-
-    #pragma omp parallel for num_threads(num_threads) schedule(dynamic)
-    for(auto it = 0; it < spin.size(); it++){
+    for (size_t it = 0; it < spin.size(); it++){
         int temp = 0;
-        for(auto jt = 0; jt < graph[it].size(); jt++){
+        for (size_t jt = 0; jt < graph[it].size(); jt++){
             temp += spin[jt]*graph[it][jt];
         }
         result[it] = temp;
@@ -67,7 +65,8 @@ int ising_energy(vector<vector<int>>graph, vector<int>spin){
     return -1*calc_energy;
 };
 
-int choice_spin(vector<vector<int>>r_spin, vector<vector<int>>graph){
+// [Opt 6] Pass by const reference instead of by value (avoid deep copy)
+int choice_spin(const vector<vector<int>>& r_spin, const vector<vector<int>>& graph){
     int N = r_spin.size();
     int trotter_M = r_spin[0].size();
     unordered_map<int, int> e_map;
@@ -88,7 +87,7 @@ int choice_spin(vector<vector<int>>r_spin, vector<vector<int>>graph){
         }
     }
     return max_value;
-} 
+}
 
 void Unit_Test_str(int MC_Step, int trotter_M, float mystery){
     float T;
@@ -97,5 +96,5 @@ void Unit_Test_str(int MC_Step, int trotter_M, float mystery){
             T = 1./(t_mc*(1. - 1./8.)/ static_cast<float>(MC_Step));
             cout<<"MC: "<<t_mc<<" M: "<<M<<" T: "<< T <<" str: "<<T/2.*log(cosh(mystery*(1.-t_mc/MC_Step)/(M* T)))<<endl;
         }
-    } 
+    }
 }
