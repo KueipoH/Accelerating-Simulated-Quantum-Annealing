@@ -8,6 +8,8 @@
 #include <chrono>
 #include <unordered_map>
 #include <cmath>
+#include <cstdint>
+#include <omp.h>
 #include "file.h"
 #include "utils.h"
 #include "gset.h"
@@ -21,11 +23,22 @@ vector<int> spin_to_binary(const vector<int>& spin_vector);
 int choice_spin(const vector<vector<int>>&, const vector<vector<int>>&);
 int ising_energy(const vector<vector<int>>&, const vector<int>&);
 
-random_device rd;
-mt19937 gen1(rd());
-uniform_real_distribution<double> uniform_dist(0.0, 1.0);
+// [Opt 7] Fast xorshift64 RNG (much faster than mt19937 for Monte Carlo)
+static inline uint64_t xorshift64(uint64_t& state) {
+    state ^= state >> 12;
+    state ^= state << 25;
+    state ^= state >> 27;
+    return state * 0x2545F4914F6CDD1DULL;
+}
+static inline float fast_random(uint64_t& state) {
+    return (xorshift64(state) >> 40) * (1.0f / 16777216.0f);  // 24-bit precision
+}
+uint64_t rng_state;
 
 int main(){
+    // Initialize fast RNG
+    random_device rd;
+    rng_state = rd() | (uint64_t(rd()) << 32);
 
     string filename = "G1";
 
@@ -66,7 +79,8 @@ int main(){
         }
     }
 
-    // Construct initial local field using adjacency list
+    // [Opt 8] OpenMP parallel initialization of local field
+    #pragma omp parallel for collapse(2) schedule(static)
     for (int i = 0; i < N; i++) {
         for (int m = 0; m < trotter_M; m++) {
             int sum = 0;
@@ -113,8 +127,7 @@ int main(){
 
                 delta_H = r_spin[idx] * (local_field[idx] - str_c_vals[m] * trotter_coupling);
 
-                float rate = uniform_dist(gen1);
-                if (expf(delta_H * neg_inv_T) > rate) {
+                if (expf(delta_H * neg_inv_T) > fast_random(rng_state)) {
                     r_spin[idx] = -r_spin[idx];
                     // [Opt 1] Sparse local field update via adjacency list
                     int flip_val = 2 * r_spin[idx];
